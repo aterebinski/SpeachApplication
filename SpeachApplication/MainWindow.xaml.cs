@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +21,22 @@ namespace SpeachApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Utworzenie obiektu SpeechSynthesizer
+        SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Ustawienie wybranego wariantu głosowego
+            synthesizer.SelectVoiceByHints(VoiceGender.Female, VoiceAge.Teen);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+            // Synteza mowy tekstu wpisanego w polu TextBox
+            synthesizer.Speak(textBox.Text);
         }
     }
 }
